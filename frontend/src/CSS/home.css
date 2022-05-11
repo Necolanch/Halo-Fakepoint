@@ -1,0 +1,12 @@
+.navigation{
+    background-color:#507D2A;
+}
+
+.home, .search, .settings, .details{
+    filter: invert(12%) sepia(15%) saturate(273%) hue-rotate(47deg) brightness(104%) contrast(86%);
+}
+
+.home:hover, .search:hover, .settings:hover, .details:hover{
+    filter: invert(92%) sepia(19%) saturate(3979%) hue-rotate(336deg) brightness(97%) contrast(92%);
+    cursor:pointer;
+}
