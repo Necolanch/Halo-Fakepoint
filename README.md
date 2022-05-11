@@ -1,13 +1,13 @@
 
 # 💻 Project & Portfolio II
 
-# Project Name: WDP2 Portfolio Project
+# Halo Fakepoint
 
-### Student First & Last Name
+### Nicholas Cruz
 
-🆔 &nbsp; 000#######
+🆔 &nbsp; 0005015360
 
-📪 &nbsp; email@student.fullsail.edu
+📪 &nbsp; NICruz@student.fullsail.edu
 
 
 ![Degree Program](https://img.shields.io/badge/Degree-Web%20Development-orange?logo=gnometerminal)
@@ -36,6 +36,7 @@ Each week I will summarize my milestone activity and progress by writing a stand
 
 For this milestone you will have created a wireframe prototype in Figma.  Post your link here, so you have easy access to it.
 
+https://www.figma.com/file/7jh8izUVfbBSwvBP93E7c7/Halo-Fakepoint?node-id=18%3A1071
 ### Milestone 2
 
 My next stand up will go here...
