@@ -3,10 +3,23 @@
 }
 
 .home, .search, .settings, .details{
+    cursor: pointer;
+}
+
+.home-icon, .search-icon, .settings-icon, .details-icon{
     filter: invert(12%) sepia(15%) saturate(273%) hue-rotate(47deg) brightness(104%) contrast(86%);
 }
 
-.home:hover, .search:hover, .settings:hover, .details:hover{
+.home-icon:hover, .search-icon:hover, .settings-icon:hover, .details-icon:hover{
     filter: invert(92%) sepia(19%) saturate(3979%) hue-rotate(336deg) brightness(97%) contrast(92%);
     cursor:pointer;
+}
+
+.serviceTag{
+    color:#EFB82A;
+}
+
+.avatar{
+    background-color:#FFE194;
+    border-radius: 50%;
 }

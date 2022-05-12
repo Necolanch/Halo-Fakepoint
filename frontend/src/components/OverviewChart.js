@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from "react";
 
 const Overview = props => (
-    <div>
-    <p>{props.summary.kills}</p>
-    <p>{props.damage.average}</p>
-    </div>
+    <ul>
+        Overview
+        <li>Kills {props.summary.kills}</li> 
+        <li>Headshots {props.breakdowns.headshots}</li>
+    </ul>
 )
 
 
 export default function OverviewChart() {
     const [summary, setSummary] = useState([]);
-    const [damage, setDamage] = useState([]);
+    const [breakdowns, setBreakdowns]=useState([]);
 
     useEffect(() => {
         const getStats = async () => {
@@ -19,7 +20,7 @@ export default function OverviewChart() {
             .then(result=>{
                 const setAll = (res) => {
                 setSummary(res[0].records.pvp.core.summary);
-                setDamage(res[0].records.pvp.core.damage);
+                setBreakdowns(res[0].records.pvp.core.breakdowns.kills);
                 }
             setAll(result);
             })
@@ -29,6 +30,6 @@ export default function OverviewChart() {
     }, []);
 
     return(
-        <Overview summary={summary} damage={damage}/>
+        <Overview summary={summary} breakdowns={breakdowns}/>
     )
 }
