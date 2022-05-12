@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 
 //import OverviewChart from "../components/OverviewChart";
-import Navigation from "../components/Navigation";
+import HomeNavigation from "../components/HomeNavigation";
 
 import "../CSS/home.css";
 
@@ -39,7 +39,7 @@ const Home = props => {
 
     return(
         <div className="wrapper h-screen">
-            <Navigation/>
+            <HomeNavigation/>
             <h1 className="absolute text-3xl font-bold text-white ml-40 mt-6">Halo Fakepoint</h1>
             <div className="flex justify-end">
             <div className="avatar absolute w-8 h-8 mt-4 mr-6"><p className="text-center mt-1">NC</p></div>
@@ -73,7 +73,7 @@ const Home = props => {
                 </li>
             </ul>
         </section>
-            <img className="w-screen h-screen opacity-10 grayscale" src={require("../Icons-IMG/background.jpg")} alt="" width="2000" height="1270" />
+            <img className="bg w-screen h-screen opacity-10 grayscale" src={require("../Icons-IMG/background.jpg")} alt="" width="2000" height="1270" />
         </div>
     )
 }

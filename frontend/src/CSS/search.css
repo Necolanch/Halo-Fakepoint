@@ -1,0 +1,27 @@
+.inputBorder{
+    border-color:#848484;
+}
+
+
+.searchInput {
+    background-color:#EAEAEA;
+    transform: outline;
+}
+
+.searchInput:focus{
+    outline: 3px solid #EFB82A;
+    transition: outline .1s ease
+}
+
+.searchButton{
+    background-color:#EFB82A;
+    color:#EAEAEA;
+}
+
+.searchButton:hover{
+    background-color:#FCB80F;
+}
+
+.addFriend{
+    background-color:#EFB82A;
+}

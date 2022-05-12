@@ -1,22 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Navigation = () => {
+import "../CSS/home.css"
+
+const SearchNavigation = () => {
     
     return(
-        <nav className="navigation absolute h-screen flex-auto flex-col w-24 z-10">
+        <nav className="navigation absolute h-screen flex-auto flex-col w-24 z-50">
                 <Link to="/">
                 <img className="mx-auto mb-60 relative top-10 hover:cursor-pointer" src={require("../Icons-IMG/unsc.png")} alt="UNSC logo" width="45" height="72" />
                 </Link>
 
                 <Link to="/">
-                <div className="home mx-auto w-fit shadow-md shadow-black/25 p-2 mb-10 rounded">
+                <div className="home mx-auto w-fit hover:shadow-md hover:shadow-black/25 p-2 mb-10 rounded">
                 <img className="home-icon" src={require("../Icons-IMG/dashboard.png")} alt="Dashboard icon" width="36" height="36" />
                 </div>
                 </Link>
                 
                 <Link to="/search">
-                <div className="search mx-auto w-fit mb-10 hover:shadow-md hover:shadow-black/25 p-2 rounded">
+                <div className="search mx-auto w-fit mb-10 shadow-md shadow-black/25 p-2 rounded">
                 <img className="search-icon" src={require("../Icons-IMG/search.png")} alt="" width="36" height="36" />
                 </div>
                 </Link>
@@ -36,4 +38,4 @@ const Navigation = () => {
     )
 }
 
-export default Navigation;
+export default SearchNavigation;
