@@ -3,6 +3,9 @@ import React, {useState, useEffect} from "react";
 //import OverviewChart from "../components/OverviewChart";
 import HomeNavigation from "../components/HomeNavigation";
 
+import {GiDeathSkull, GiTargeted, GiStopwatch, GiLaurelsTrophy, GiStarMedal} from "react-icons/gi";
+import {FaPercentage} from "react-icons/fa";
+
 import "../CSS/home.css";
 
 const Home = props => {
@@ -51,25 +54,25 @@ const Home = props => {
           </div>
             <ul className="text-right mr-28">
                 <li className="mb-4">
-                    <img className="-mb-6 ml-24" src={require("../Icons-IMG/death-skull.png")} alt="" width="25" height="25" /> 
+                    <GiDeathSkull className="skull -mb-6 ml-24"/> 
                     Kills &nbsp; {summary.kills}
                 </li> 
                 <li className="mb-4 mr-6"> 
-                <img className="-mb-6 ml-6" src={require("../Icons-IMG/targeted.png")} alt="" width="25" height="25" />
+                <GiTargeted className="headshots -mb-6 ml-6"/>
                 Headshots &nbsp; {breakdowns.headshots}</li>
                 <li className="mb-4">
-                <img className="-mb-6 -ml-10" src={require("../Icons-IMG/stopwatch.png")} alt="" width="25" height="25" />
+                <GiStopwatch className="stopwatch -mb-6 -ml-10"/>
                     Time Played &nbsp; {timePlayed}</li>
             </ul>
             <ul className="">
-                <li className="mb-5">
-                    {wins} &nbsp; Wins <img className="-mt-7 ml-24" src={require("../Icons-IMG/laurels-trophy.png")} alt="" width="25" height="25" />
+                <li className="wins">
+                    {wins} &nbsp; Wins <GiLaurelsTrophy className="trophy -mt-7 ml-24"/>
                 </li>
-                <li className="mb-5 ml-6">
-                    {kd} &nbsp; KDR <img className="-mt-6 ml-24" src={require("../Icons-IMG/percent-solid.png")} alt="" width="18" height="18" />
+                <li className="kd ml-6">
+                    {kd} &nbsp; KDR <FaPercentage className="percentage -mt-6 ml-24"/>
                 </li>
-                <li className="mb-4">
-                    {rank.tier} {rank.sub_tier} Rank <img className="-mt-6 ml-36" src={require("../Icons-IMG/star-medal.png")} alt="" width="20" height="20" />
+                <li className="rank">
+                    {rank.tier} {rank.sub_tier} Rank <GiStarMedal className="medal -mt-6 ml-36"/>
                 </li>
             </ul>
         </section>

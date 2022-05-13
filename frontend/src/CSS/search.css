@@ -25,3 +25,8 @@
 .addFriend{
     background-color:#EFB82A;
 }
+
+.friend:hover{
+    background-color:#848484;
+    cursor:pointer;
+}
