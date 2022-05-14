@@ -39,7 +39,13 @@ For this milestone you will have created a wireframe prototype in Figma.  Post y
 https://www.figma.com/file/7jh8izUVfbBSwvBP93E7c7/Halo-Fakepoint?node-id=18%3A1071
 ### Milestone 2
 
-My next stand up will go here...
+This week I worked on translating my Figma design to code. Not only did I get my navigation working, I got the majority of my styling done. I also got my backend server setup and fetching from the Halo API.
+
+A challenge I had was getting elements above my background image using z-index. When creating a new page and getting my initial navigation and background image placed, new elements I put down I forgot to elevate using z-index. So that is something I had to continuously remind myself of to get my layout working as expected.
+
+I accomplished querying a single API in one call to multiple endpoints.
+
+Next I plan to prioritize setting up utilizing my database and GETting/POSTing from that and getting the search page to transition from the initial layout to a full statistics layout after searching for a player.
 
 ### Milestone 3
 
