@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 
 import DetailsNavigation from "../components/DetailsNavigation";
 
-import {GiDeathSkull, GiTargeted, GiStopwatch, GiLaurelsTrophy, GiStarMedal, GiFire, GiHealthDecrease, GiInternalInjury} from "react-icons/gi";
+import {GiDeathSkull, GiFire, GiHealthDecrease, GiInternalInjury} from "react-icons/gi";
 import {FaPercentage, FaHandshake} from "react-icons/fa";
 
 import "../CSS/details.css";
@@ -12,6 +12,7 @@ const Details = props => {
     const [damage, setDamage]=useState([]);
     const [shots, setShots]=useState([]);
     const [kd, setKd]=useState([]);
+    const [bd, setBd]=useState({});
 
     useEffect(() => {
         const getStats = async () => {
@@ -23,6 +24,7 @@ const Details = props => {
                     setKd(res[0].records.pvp.core.kdr.toFixed(2));
                     setDamage(res[0].records.pvp.core.damage);
                     setShots(res[0].records.pvp.core.shots);
+                    setBd(res[0].records.pvp.core.breakdowns);
                 }
             setAll(result);
             })
@@ -30,9 +32,6 @@ const Details = props => {
         getStats();
         return;
     }, []);
-
-    const damagePerGame = damage.average;
-    const accuracy = shots.accuracy;
     
     return (
         <div>
@@ -88,7 +87,7 @@ const Details = props => {
                     </li>
                     <li>
                         <FaPercentage className="damage -mb-5 ml-8"/>
-                        <span className="ml-16">Dealt/Game &nbsp; {Math.floor(damagePerGame)}</span>
+                        <span className="ml-16">Dealt/Game &nbsp; {Math.floor(damage.average)}</span>
                     </li>
                 </ul>
               </section>
@@ -106,7 +105,7 @@ const Details = props => {
                     </li>
                     <li>
                         <FaPercentage className="damage -mb-5 ml-8"/>
-                        <span className="ml-16">Accuracy &nbsp; {Math.floor(accuracy)}%</span>
+                        <span className="ml-16">Accuracy &nbsp; {Math.floor(shots.accuracy)}%</span>
                     </li>
                 </ul>
               </section>
@@ -116,7 +115,7 @@ const Details = props => {
                 <ul className="flex flex-wrap">
                     <li>
                     <GiDeathSkull className="gunfight -mb-5"/>
-                    <span className="ml-8">Kills &nbsp; {}</span>
+                    <span className="ml-8">Kills &nbsp; {bd.kills.melee}</span>
                     </li>
                     <li>
                         <img className="-mb-5 ml-8" src={require("../Icons-IMG/tombstone.png")} alt="" width="20" height="20"/>
