@@ -1,15 +1,15 @@
 const lib = require("lib")({token: 'tok_dev_epDvcXBVJ6echxsc8BqwurRoWqHgUXJnigVzar9guAqyg3eG3RXh4oSpxxRwapox'});
 
-const generalStats = async (gamertag) => {
+const generalStats = async (gamertag,season) => {
     try {
         const res = await Promise.all([
             lib.halo.infinite["@1.3.1"].stats.players["service-record"].multiplayer.matchmade({
                 gamertag:gamertag,
-                season:1
+                season:parseInt(season)
             }),
             lib.halo.infinite['@1.3.1'].stats.players.csrs({
                 gamertag: gamertag,
-                season: 1
+                season: parseInt(season)
             }),
             lib.halo.infinite['@1.3.1'].appearance.players['spartan-id']({
                 gamertag: gamertag

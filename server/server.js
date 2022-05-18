@@ -31,8 +31,8 @@ app.get("/",(req,res,next)=>{
     )
 })
 
-app.get("/:gamertag",(req,res,next)=>{
-    generalStats(req.params.gamertag)
+app.get("/:gamertag/:season",(req,res,next)=>{
+    generalStats(req.params.gamertag, req.params.season)
     .then(result=>{
         return res.status(200).json(result);
     })

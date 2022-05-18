@@ -13,7 +13,7 @@ import { GamertagContext } from "../contexts/Gamertag";
 import "../CSS/details.css";
 
 const SearchResult = props => {
-    const {searchGamertag} = useContext(GamertagContext);
+    const {searchGamertag, searchSeason} = useContext(GamertagContext);
 
     const [summary, setSummary]=useState([]);
     const [damage, setDamage]=useState([]);
@@ -40,7 +40,7 @@ const SearchResult = props => {
 
     useEffect(() => {
         const getStats = async () => {
-            await fetch(`http://localhost:3001/${searchGamertag}`)
+            await fetch(`http://localhost:3001/${searchGamertag}/${searchSeason}`)
             .then(response=>response.json())
             .then(result=>{
                 const setAll = (res) => {

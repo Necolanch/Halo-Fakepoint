@@ -10,22 +10,24 @@ import "../CSS/search.css";
 const Search = props => {
   const [playerSearched, setPlayerSearched]=useState(false);
   const navigate = useNavigate();
-  const {setSearchGamertag}=useContext(GamertagContext);
+  const {setSearchGamertag, setSearchSeason}=useContext(GamertagContext);
 
   //Make a function to be called that handles the form submission
   //When form is submitted, retrieve value from the search input and return Details page view
   //Fetch data from server/API with value from search input
 
   const gamertag=useRef("");
+  const season=useRef("");
 
-  const searchPlayer = async(gt, event) => {
+  const searchPlayer = async(gt, szn, event) => {
     //Use state variable for if a player is searched, set to false initially. If that is true
     //and valid, return should be of Details page component with gamertag prop passed in
     //If false do another ternary asking if errorStatus is true or false, if true return
     //search page with error message, if false return Search page as normal
     event.preventDefault();
     setSearchGamertag(gt);
-    await fetch(`http://localhost:3001/${gt}`)
+    setSearchSeason(parseInt(szn));
+    await fetch(`http://localhost:3001/${gt}/${szn}`)
     .then(response=>response.json())
     .then(result=>{
       if (result.message) {
@@ -62,11 +64,14 @@ useEffect(()=>{
           <div className="search">
             <h3 className="absolute w-screen text-center text-3xl uppercase font-semibold text-white mt-16">Search</h3>
         
-            <form onSubmit={event=>searchPlayer(gamertag.current.value, event)} className="searchForm absolute w-screen flex flex-col items-center mt-96 z-10">
+            <form onSubmit={event=>searchPlayer(gamertag.current.value, season.current.value, event)} className="searchForm absolute w-screen flex flex-col items-center mt-96 z-10">
             <p className="text-xl text-white font-medium">FIND SERVICE RECORDS OF OTHER PLAYERS TO COMPARE TO YOURS</p>
 
               <div className="inputBorder w-1/2 h-24 border border-white flex justify-center items-center">
-                <input className="searchInput w-11/12 h-16 p-2 text-2xl" ref={gamertag} placeholder="Gamertag"></input>
+                <input className="searchInput w-11/12 h-16 p-2 text-2xl" ref={gamertag} placeholder="Gamertag" />
+              </div>
+              <div className="inputBorder w-1/6 h-24 mt-8 border border-white flex justify-center items-center">
+                <input className="searchInput w-11/12 h-16 p-2 text-2xl" ref={season} placeholder="Season" type="number" />
               </div>
 
               <div className="border p-2 mt-10">
