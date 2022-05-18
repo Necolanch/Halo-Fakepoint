@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef, useContext} from "react";
 
 import SearchNavigation from "../components/SearchNavigation";
+import TopSearch from "../components/TopSearch";
 
 import {GiDeathSkull, GiFire, GiHealthDecrease, GiInternalInjury, GiBullseye, GiTargeted, GiMailedFist, GiGrenade, GiNinjaHead, GiMissileSwarm, GiBattleTank, GiLaurelsTrophy, GiStopwatch, GiExitDoor, GiStarMedal} from "react-icons/gi";
 import {FaPercentage, FaHandshake, FaThumbsDown, FaEquals} from "react-icons/fa";
@@ -98,6 +99,8 @@ const SearchResult = props => {
             <div className="flex justify-end">
             <div className="avatar absolute w-8 h-8 mt-4 mr-6"><p className="text-center mt-1">NC</p></div>
             </div>
+
+        <TopSearch/>
 
         <div className="serviceRecord absolute flex w-11/12 top-20 ml-32 text-white z-10">
         <section className="w-1/2">
@@ -372,7 +375,7 @@ const SearchResult = props => {
         </div>
 
         <section className="medals absolute top-3/4 ml-28 w-12/12 flex flex-wrap items-center z-10">
-            <h3 className="absolute mb-72 text-white text-2xl font-semibold">Medals</h3>
+            <h3 className="absolute mb-64 text-white text-2xl font-semibold">Medals</h3>
             {
                 newMedals.current.map((medal, index)=>{
                     if (index > 14) {

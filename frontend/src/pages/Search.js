@@ -66,7 +66,7 @@ useEffect(()=>{
             <p className="text-xl text-white font-medium">FIND SERVICE RECORDS OF OTHER PLAYERS TO COMPARE TO YOURS</p>
 
               <div className="inputBorder w-1/2 h-24 border border-white flex justify-center items-center">
-                <input className="searchInput w-11/12 h-16 p-2 text-2xl" ref={gamertag}></input>
+                <input className="searchInput w-11/12 h-16 p-2 text-2xl" ref={gamertag} placeholder="Gamertag"></input>
               </div>
 
               <div className="border p-2 mt-10">
