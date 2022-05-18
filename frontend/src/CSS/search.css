@@ -37,3 +37,13 @@
 .errorIcon{
     filter: invert(46%) sepia(37%) saturate(1073%) hue-rotate(315deg) brightness(88%) contrast(95%);
 }
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button{
+    -webkit-appearance:none;
+    margin:0;
+}
+
+input[type=number]{
+    -moz-appearance:textfield;
+}

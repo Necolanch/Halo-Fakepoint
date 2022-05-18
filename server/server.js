@@ -22,7 +22,7 @@ app.use((req, res, next)=>{
 })
 
 app.get("/",(req,res,next)=>{
-    generalStats("NecolanchTTV")
+    generalStats("NecolanchTTV", 1)
     .then(result=>{
         return res.status(200).json(result);
     })

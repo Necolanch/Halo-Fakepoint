@@ -44,7 +44,7 @@ const SearchResult = props => {
             .then(response=>response.json())
             .then(result=>{
                 const setAll = (res) => {
-                    console.log(searchGamertag.current);
+                    console.log(res)
                     setSummary(res[0].records.pvp.core.summary);
                     setDamage(res[0].records.pvp.core.damage);
                     setShots(res[0].records.pvp.core.shots);
@@ -66,6 +66,7 @@ const SearchResult = props => {
                     setRank(crossplay[0].response.all_time);
                     setRankedKd(res[0].records.ranked.core.kdr.toFixed(2));
 
+                    newMedals.current=[];
                     medals.current=res[0].records.pvp.core.breakdowns.medals;
                     for (let i = 0; i < 15; i++) {
                         let newMedal = {};
@@ -78,7 +79,7 @@ const SearchResult = props => {
                                     icon:medal.image_urls.medium,
                                     count:medals.current[i].count
                                 }
-                                newMedals.current =[...newMedals.current, newMedal];
+                                newMedals.current = [...newMedals.current, newMedal];
                             };
                         });
                     };
@@ -88,7 +89,7 @@ const SearchResult = props => {
         }
         getStats();
         return;
-    }, [searchGamertag]);
+    }, [searchGamertag, searchSeason, medals]);
     
     return (
         <div>
@@ -375,7 +376,7 @@ const SearchResult = props => {
         </div>
 
         <section className="medals absolute top-3/4 ml-28 w-12/12 flex flex-wrap items-center z-10">
-            <h3 className="absolute mb-64 text-white text-2xl font-semibold">Medals</h3>
+            <h3 className="absolute mb-72 text-white text-2xl font-semibold">Medals</h3>
             {
                 newMedals.current.map((medal, index)=>{
                     if (index > 14) {
