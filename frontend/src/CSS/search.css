@@ -2,6 +2,9 @@
     border-color:#848484;
 }
 
+.searchForm{
+    cursor:initial;
+}
 
 .searchInput {
     background-color:#EAEAEA;
@@ -29,4 +32,8 @@
 .friend:hover{
     background-color:#848484;
     cursor:pointer;
+}
+
+.errorIcon{
+    filter: invert(46%) sepia(37%) saturate(1073%) hue-rotate(315deg) brightness(88%) contrast(95%);
 }

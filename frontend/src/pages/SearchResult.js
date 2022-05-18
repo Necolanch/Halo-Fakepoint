@@ -1,15 +1,19 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect, useRef, useContext} from "react";
 
-import DetailsNavigation from "../components/DetailsNavigation";
+import SearchNavigation from "../components/SearchNavigation";
 
 import {GiDeathSkull, GiFire, GiHealthDecrease, GiInternalInjury, GiBullseye, GiTargeted, GiMailedFist, GiGrenade, GiNinjaHead, GiMissileSwarm, GiBattleTank, GiLaurelsTrophy, GiStopwatch, GiExitDoor, GiStarMedal} from "react-icons/gi";
 import {FaPercentage, FaHandshake, FaThumbsDown, FaEquals} from "react-icons/fa";
 import {MdClose} from "react-icons/md";
 import {ImSigma} from "react-icons/im"
 
+import { GamertagContext } from "../contexts/Gamertag";
+
 import "../CSS/details.css";
 
-const Details = props => {
+const SearchResult = props => {
+    const {searchGamertag} = useContext(GamertagContext);
+
     const [summary, setSummary]=useState([]);
     const [damage, setDamage]=useState([]);
     const [shots, setShots]=useState([]);
@@ -35,10 +39,11 @@ const Details = props => {
 
     useEffect(() => {
         const getStats = async () => {
-            await fetch(`http://localhost:3001/${props.gamertag}`)
+            await fetch(`http://localhost:3001/${searchGamertag}`)
             .then(response=>response.json())
             .then(result=>{
                 const setAll = (res) => {
+                    console.log(searchGamertag.current);
                     setSummary(res[0].records.pvp.core.summary);
                     setDamage(res[0].records.pvp.core.damage);
                     setShots(res[0].records.pvp.core.shots);
@@ -82,11 +87,11 @@ const Details = props => {
         }
         getStats();
         return;
-    }, [props]);
+    }, [searchGamertag]);
     
     return (
         <div>
-        <DetailsNavigation />
+        <SearchNavigation />
 
         <h1 className="absolute text-3xl font-bold text-white ml-40 mt-6">Halo Fakepoint</h1>
            
@@ -390,4 +395,4 @@ const Details = props => {
     )
 }
 
-export default Details;
+export default SearchResult;

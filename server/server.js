@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const port = process.env.port || 3001;
@@ -23,7 +22,17 @@ app.use((req, res, next)=>{
 })
 
 app.get("/",(req,res,next)=>{
-    generalStats()
+    generalStats("NecolanchTTV")
+    .then(result=>{
+        return res.status(200).json(result);
+    })
+    .catch(err=>
+        res.status(501).json({message:err.message, status:err.status})
+    )
+})
+
+app.get("/:gamertag",(req,res,next)=>{
+    generalStats(req.params.gamertag)
     .then(result=>{
         return res.status(200).json(result);
     })
