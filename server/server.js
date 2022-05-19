@@ -1,11 +1,15 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const port = process.env.port || 3001;
 
 const {generalStats}=require("./haloAPI/matchmaking");
 
+const haloRoutes = require("./routes/haloRoutes");
+
+app.use(cors());
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
@@ -40,6 +44,8 @@ app.get("/:gamertag/:season",(req,res,next)=>{
         res.status(501).json({message:err.message, status:err.status})
     )
 })
+
+app.use("/friends", haloRoutes);
 
 //middleware modules
 app.use((req, res, next) => {

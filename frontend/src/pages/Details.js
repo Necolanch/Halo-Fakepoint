@@ -35,7 +35,7 @@ const Details = props => {
 
     useEffect(() => {
         const getStats = async () => {
-            await fetch(`http://localhost:3001/${props.gamertag}`)
+            await fetch(`http://localhost:3001/${props.gamertag}/${props.season}`)
             .then(response=>response.json())
             .then(result=>{
                 const setAll = (res) => {

@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef, useContext} from "react";
 import { useNavigate } from "react-router-dom";
 
 import SearchNavigation from "../components/SearchNavigation";
+import FriendsList from "../components/FriendsList";
 
 import { GamertagContext } from "../contexts/Gamertag";
 
@@ -74,26 +75,12 @@ useEffect(()=>{
                 <input className="searchInput w-11/12 h-16 p-2 text-2xl" ref={season} placeholder="Season" type="number" />
               </div>
 
-              <div className="border p-2 mt-10">
+              <div className="inputBorder border p-2 mt-10">
                 <button className="searchButton w-28 p-3 text-lg" type="submit">Search</button>
               </div>
             </form>
 
-            <form className="friendsSearch absolute w-1/6 h-auto flex flex-col items-center mt-40 ml-24 top-2/4 left-3/4 bg-black/20 text-white rounded-md z-10">
-                <h5 className="mb-4 text-lg font-medium">Friends List</h5>
-                <ul className="friendsList w-full h-24 pl-4 mb-4 overflow-auto">
-                  <li className="friend mr-4 pl-2 pr-2">Falcated</li>
-                  <li className="friend mr-4 pl-2 pr-2">Falcated</li>
-                  <li className="friend mr-4 pl-2 pr-2">Falcated</li>
-                  <li className="friend mr-4 pl-2 pr-2">Falcated</li>
-                  <li className="friend mr-4 pl-2 pr-2">Falcated</li>
-                  <li className="friend mr-4 pl-2 pr-2">Falcated</li>
-                </ul>
-                <div className="border h-auto p-2 mb-4">
-                <input className="friendInput"/>
-                </div>
-                <button className="addFriend mb-4 p-1">Add Friend</button>
-            </form>
+          <FriendsList/>
           </div>
 
             <img className="w-screen h-screen opacity-10 grayscale" src={require("../Icons-IMG/background.jpg")} alt="" width="2000" height="1270" />

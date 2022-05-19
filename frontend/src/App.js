@@ -23,7 +23,7 @@ const store = GlobalState();
          <Route path="/" element={<Home/>}/>
          <Route path="/search" element={<Search/>}/>
          <Route path="/settings" element={<Settings/>}/>
-         <Route path="/details" element={<Details gamertag={store.gamertag.current}/>} />
+         <Route path="/details" element={<Details gamertag={store.gamertag.current} season="1"/>} />
          <Route path="/result" element={<SearchResult/>} />
        </Routes>
        </GamertagContext.Provider>
