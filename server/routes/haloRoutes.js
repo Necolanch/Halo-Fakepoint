@@ -47,4 +47,18 @@ router.post("/", (req, res)=>{
     })
 })
 
+router.delete("/:gamertag", (req, res) => {
+    const gamertag=req.params.gamertag;
+    Friend.findOneAndDelete({gamertag:gamertag})
+    .exec()
+    .then(result=>{
+        res.status(200)
+    })
+    .catch(err=>{
+        res.status(500).json({
+            message:err.message
+        })
+    })
+})
+
 module.exports = router;

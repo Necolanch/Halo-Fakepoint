@@ -1,6 +1,8 @@
 import React, {useEffect, useState, useRef, useContext} from "react";
 import { useNavigate } from "react-router-dom";
 
+import {MdDelete} from "react-icons/md";
+
 import { GamertagContext } from "../contexts/Gamertag";
 
 const FriendsList = props => {
@@ -48,6 +50,18 @@ const FriendsList = props => {
         findFriends();
     }
 
+    const deleteFriend = async (gt,e) => {
+        e.preventDefault();
+        await fetch(`http://localhost:3001/friends/${gt}`, {
+            method:"DELETE"
+        })
+        .then()
+        .catch(err=>{
+            throw Error (err.message);
+        })
+        findFriends()
+    }
+
     const searchFriend = async (gt, season, e) => {
         e.preventDefault()
         setSearchGamertag(gt);
@@ -77,12 +91,17 @@ const FriendsList = props => {
       }, [friendSearched, navigate])
 
     return (
-        <form onSubmit={e=>addFriend(newFriend.current.value, e)} className="friendsSearch absolute w-1/6 h-auto flex flex-col items-center mt-40 ml-24 top-2/4 left-3/4 bg-black/20 text-white rounded-md z-10">
+        <form onSubmit={e=>addFriend(newFriend.current.value, e)} className="friendsSearch absolute w-1/6 h-auto flex flex-col items-center mt-40 ml-24 top-2/4 left-3/4 bg-black/20 text-white rounded-md z-10 cursor-default">
                 <h5 className="my-4 text-lg font-medium">Friends List</h5>
                 <ul className="friendsList w-full h-24 pl-4 mb-4 overflow-auto">
                     {
                         friends.map((friend, key)=>{
-                            return <li key={key} className="friend mr-4 pl-2 pr-2" onClick={e=>searchFriend(friend.gamertag, 2, e)}>{friend.gamertag}</li>
+                            return (
+                            <div key={key} className="flex">
+                            <li className="friend w-full mr-6 pl-2 pr-2" onClick={e=>searchFriend(friend.gamertag, 2, e)}>{friend.gamertag}</li>
+                            <MdDelete className="w-6 h-6 mr-4 hover:bg-black/40 hover:cursor-pointer" onClick={e=>deleteFriend(friend.gamertag, e)}/>
+                            </div>
+                            )
                         })
                     }
                 </ul>
