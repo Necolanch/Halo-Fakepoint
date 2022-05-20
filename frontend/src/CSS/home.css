@@ -36,3 +36,5 @@
 .rank{
     margin-top:.75em;
 }
+
+.halo-button{background-color:#628544;border:0;border-radius:3px;color:hsla(0,0%,100%,.85);cursor:pointer;margin-right:.5rem;padding:.5rem 1.5rem;transition:all .5s ease}
