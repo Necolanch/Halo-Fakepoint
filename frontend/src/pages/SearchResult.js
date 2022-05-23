@@ -44,7 +44,6 @@ const SearchResult = props => {
             .then(response=>response.json())
             .then(result=>{
                 const setAll = (res) => {
-                    console.log(res)
                     setSummary(res[0].records.pvp.core.summary);
                     setDamage(res[0].records.pvp.core.damage);
                     setShots(res[0].records.pvp.core.shots);
