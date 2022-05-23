@@ -242,7 +242,7 @@ const SearchResult = props => {
             </section>
 
             <section className="w-1/2 z-10">
-              <section className="w-1/2">
+              <section className="w-3/5">
                 <h5 className="text-xl font-medium">Ranked Gunfight Stats</h5>
                 <ul className="flex flex-wrap">
                     <li>
