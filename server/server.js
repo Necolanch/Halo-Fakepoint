@@ -7,7 +7,9 @@ const port = process.env.port || 3001;
 
 const {generalStats}=require("./haloAPI/matchmaking");
 
-const haloRoutes = require("./routes/haloRoutes");
+const searchRoutes = require("./routes/searchRoutes");
+const friendRoutes = require("./routes/friendRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 app.use(cors());
 app.use(express.urlencoded({extended:true}));
@@ -35,17 +37,11 @@ app.get("/",(req,res,next)=>{
     )
 })
 
-app.get("/:gamertag/:season",(req,res,next)=>{
-    generalStats(req.params.gamertag, req.params.season)
-    .then(result=>{
-        return res.status(200).json(result);
-    })
-    .catch(err=>
-        res.status(501).json({message:err.message, status:err.status})
-    )
-})
 
-app.use("/friends", haloRoutes);
+app.use("/search", searchRoutes)
+app.use("/friends", friendRoutes);
+app.use("/users", userRoutes);
+
 
 //middleware modules
 app.use((req, res, next) => {

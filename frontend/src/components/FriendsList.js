@@ -66,7 +66,7 @@ const FriendsList = props => {
         e.preventDefault()
         setSearchGamertag(gt);
         setSearchSeason(parseInt(season));
-        await fetch(`http://localhost:3001/${gt}/${season}`)
+        await fetch(`http://localhost:3001/search/${gt}/${season}`)
         .then(response=>response.json())
         .then(result=>{
             if (result.message) {

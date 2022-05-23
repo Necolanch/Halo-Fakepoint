@@ -21,7 +21,7 @@ const TopSearch = props => {
         event.preventDefault();
         setSearchGamertag(gt);
         setSearchSeason(parseInt(szn));
-        await fetch(`http://localhost:3001/${gt}/${szn}`)
+        await fetch(`http://localhost:3001/search/${gt}/${szn}`)
         .then(response=>response.json())
         .then(result=>{
           if (result.message) {
@@ -29,7 +29,7 @@ const TopSearch = props => {
               return null;
             } else {
             const error = document.createElement("div");
-            error.className="error flex items-center mt-8";
+            error.className="error flex items-center ml-8";
             error.innerHTML=`<img class="errorIcon" src=${require("../Icons-IMG/error.png")} alt="" width="35" height="35"/> <span class="errorMessage text-red-500 ml-4">PLAYER NOT FOUND</span>`;
             document.querySelector(".topSearchForm").appendChild(error);
             }

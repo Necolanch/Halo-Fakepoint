@@ -28,7 +28,7 @@ const Search = props => {
     event.preventDefault();
     setSearchGamertag(gt);
     setSearchSeason(parseInt(szn));
-    await fetch(`http://localhost:3001/${gt}/${szn}`)
+    await fetch(`http://localhost:3001/search/${gt}/${szn}`)
     .then(response=>response.json())
     .then(result=>{
       if (result.message) {

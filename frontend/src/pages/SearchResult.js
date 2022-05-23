@@ -40,7 +40,7 @@ const SearchResult = props => {
 
     useEffect(() => {
         const getStats = async () => {
-            await fetch(`http://localhost:3001/${searchGamertag}/${searchSeason}`)
+            await fetch(`http://localhost:3001/search/${searchGamertag}/${searchSeason}`)
             .then(response=>response.json())
             .then(result=>{
                 const setAll = (res) => {

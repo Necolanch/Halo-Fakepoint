@@ -1,11 +1,38 @@
-import React from "react";
+import React, {useState, useEffect, useContext} from "react";
 
 import SettingsNavigation from "../components/SettingsNavigation";
 import { LeftInput, RightInput, RightDisabled } from "../components/Input";
 
+import {GamertagContext} from "../contexts/Gamertag"
+
 import "../CSS/settings.css";
 
 const Settings = props => {
+  
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [gt, setGt] = useState("");
+  const {gamertag} = useContext(GamertagContext);
+
+  useEffect(()=>{
+    const getUser = async () => {
+      await fetch(`http://localhost:3001/users/${gamertag.current}`)
+      .then(response=>response.json())
+      .then(result=>{
+        setFirstName(result.firstName);
+        setLastName(result.lastName);
+        setGt(result.gamertag);
+        setEmail(result.email);
+      })
+      .catch(err=>{
+        throw Error(err.message);
+      })
+    }
+    getUser();
+  }, [])
+
+
     return(
         <div>
             <SettingsNavigation/>
@@ -22,16 +49,16 @@ const Settings = props => {
               <div className="mt-40">
                 <div className="flex mb-20">
 
-                  <LeftInput label="First Name" value="Nicholas" />
+                  <LeftInput label="First Name" value={firstName} />
 
-                  <RightInput label="Last Name" value="Cruz" />
+                  <RightInput label="Last Name" value={lastName} />
                 </div>
 
                 <div className="flex">
 
-                  <LeftInput label="Email" value="necolanch@gmail.com" />
+                  <LeftInput label="Email" value={email} />
 
-                  <RightDisabled label="Gamertag" value="NecolanchTTV" />
+                  <RightDisabled label="Gamertag" value={gt} />
                 </div>
 
               </div>
