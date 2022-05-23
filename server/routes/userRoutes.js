@@ -41,4 +41,31 @@ router.post("/", (req, res)=>{
     })
 });
 
+router.patch("/:gamertag", (req, res)=>{
+    const gt = req.params.gamertag;
+    const updatedAccount = {
+        firstName:req.body.firstName,
+        lastName:req.body.lastName,
+        email:req.body.email,
+        gamertag:gt
+    }
+    User.findOneAndUpdate({gamertag:gt}, updatedAccount, {returnOriginal:false})
+    .exec()
+    .then(result=>{
+        if (!result) {
+            return res.status(404).json({
+                message:Messages.teamNotFound
+            })
+        }
+        res.status(200).json(result)
+    })
+    .catch(err=>{
+        res.status(500).json({
+            error:{
+                message:err.message
+            }
+        })
+    })
+})
+
 module.exports=router;
