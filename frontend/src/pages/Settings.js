@@ -30,7 +30,7 @@ const Settings = props => {
       })
     }
     getUser();
-  }, [])
+  }, [gamertag])
 
 
     return(
