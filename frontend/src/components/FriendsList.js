@@ -24,7 +24,7 @@ const FriendsList = props => {
         findFriends();
     }, []);
 
-    const findFriends = async() =>{
+    const findFriends = async () =>{
         await fetch(`http://localhost:3001/friends`)
         .then(response=>response.json())
         .then(result=>{
@@ -59,7 +59,7 @@ const FriendsList = props => {
         .catch(err=>{
             throw Error (err.message);
         })
-        findFriends()
+        findFriends();
     }
 
     const searchFriend = async (gt, season, e) => {
