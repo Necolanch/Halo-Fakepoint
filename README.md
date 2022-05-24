@@ -49,8 +49,17 @@ Next I plan to prioritize setting up utilizing my database and GETting/POSTing f
 
 ### Milestone 3
 
-Stay tuned, this stand up is coming soon. Remember to include links to the API and Libraries used.  Also discuss your persistent data
-Check documentation on FSO for everything that is required!
+I had tons of fun getting into the actual development of functionalities. This week I worked on making my search page fully functional. I got my ahead on week 2 and got my API connected all the way for a couple of pages. I just had to get the search functionality and database connected how I wanted. I also set up the tour on the home page with the [react-shephered React wrapper](https://github.com/shipshapecode/react-shepherd) for the [ShepherdJS library](https://shepherdjs.dev/). The search page can perform a search on a player based on their gamertag and the season pulls up their stats based on the selected season of the game. After searching from the main search page, there is a smaller version of the main search bar at the top of the search result that can be used to perform another search following the initial without having to navigate back to the main search page. On the main search page in the bottom right corner is a section that a user can add some favorite players or friends of theirs based on their gamertag and is stored in a databased. Clicking on a friend that is in the list performs a traditional but finds their stats based on the current season of the game. A user can also delete a friend from the list and it is reflected in the database. Lastly, the Settings page for the account can be updated with different information and is reflected in a different collection but in the same database.
+
+I had a problem with a conflicting route and I am addressing that now by keeping a routes folder for the different pieces I have to prevent that from happening again. I had a smaller problem of not remembering to turn my initial response to JSON when performing a database command. Looking at other pieces I have done to see what is missing always helps.
+
+This week I accomplished becoming more comfortable and confident in my work with back-end technologies such as NodeJS, Express, and Mongoose. I especially enjoy how smooth Mongoose makes it working with a server side language to communicate everything with a MongoDB database.
+
+Next I plan to prioritize refactoring my code to make it as dynamic as possible. I have to work with my calls to the API I am utilizing and really make the way I am utilizing the responses scaleable. After that I will be polishing my styling to make it a bit more responsive or at least friendly to some reduced sizes.
+
+[Halo API](https://autocode.com/halo/)
+[Mongoose Docs](https://mongoosejs.com/)
+[React-icons](https://react-icons.github.io/react-icons)
 
 ### Milestone 4
 
