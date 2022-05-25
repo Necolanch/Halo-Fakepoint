@@ -57,9 +57,9 @@ This week I accomplished becoming more comfortable and confident in my work with
 
 Next I plan to prioritize refactoring my code to make it as dynamic as possible. I have to work with my calls to the API I am utilizing and really make the way I am utilizing the responses scaleable. After that I will be polishing my styling to make it a bit more responsive or at least friendly to some reduced sizes.
 
-[Halo API](https://autocode.com/halo/)
-[Mongoose Docs](https://mongoosejs.com/)
-[React-icons](https://react-icons.github.io/react-icons)
+- [Halo API](https://autocode.com/halo/)
+- [Mongoose Docs](https://mongoosejs.com/)
+- [React-icons](https://react-icons.github.io/react-icons)
 
 ### Milestone 4
 
