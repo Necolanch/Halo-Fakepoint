@@ -4,6 +4,7 @@ import Start from "../components/Start";
 
 //import OverviewChart from "../components/OverviewChart";
 import HomeNavigation from "../components/HomeNavigation";
+import {Avatar} from "../components/Avatar";
 
 import {GiDeathSkull, GiTargeted, GiStopwatch, GiLaurelsTrophy, GiStarMedal} from "react-icons/gi";
 import {FaPercentage} from "react-icons/fa";
@@ -187,9 +188,7 @@ const Home = props => {
         <div className="wrapper h-screen">
             <HomeNavigation/>
             <h1 className="absolute text-3xl font-bold text-white ml-40 mt-6">Halo Fakepoint</h1>
-            <div className="flex justify-end">
-            <div className="avatar absolute w-8 h-8 mt-4 mr-6"><p className="text-center mt-1">NC</p></div>
-            </div>
+            <Avatar/>
         <section className="overview absolute w-screen text-white flex justify-end mt-72 -ml-40 text-xl">
             <h3 className="-mt-32 text-2xl font-semibold">Welcome Spartan <span className="serviceTag">{id}</span>!</h3>
           <div className="-mt-10 -mr-80 text-2xl font-semibold underline uppercase">

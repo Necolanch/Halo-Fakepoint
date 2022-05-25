@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from "react";
 
 import DetailsNavigation from "../components/DetailsNavigation";
+import {Avatar} from "../components/Avatar";
 
 import {GiDeathSkull, GiFire, GiHealthDecrease, GiInternalInjury, GiBullseye, GiTargeted, GiMailedFist, GiGrenade, GiNinjaHead, GiMissileSwarm, GiBattleTank, GiLaurelsTrophy, GiStopwatch, GiExitDoor, GiStarMedal} from "react-icons/gi";
 import {FaPercentage, FaHandshake, FaThumbsDown, FaEquals} from "react-icons/fa";
@@ -10,6 +11,11 @@ import {ImSigma} from "react-icons/im"
 import "../CSS/details.css";
 
 const Details = props => {
+    const overall=useRef({});
+    const ranked=useRef({});
+    const spartan=useRef({});
+    const medalsCollection=useRef([]);
+
     const [summary, setSummary]=useState([]);
     const [damage, setDamage]=useState([]);
     const [shots, setShots]=useState([]);
@@ -38,38 +44,51 @@ const Details = props => {
             await fetch(`http://localhost:3001/search/${props.gamertag}/${props.season}`)
             .then(response=>response.json())
             .then(result=>{
-                const setAll = (res) => {
-                    setSummary(res[0].records.pvp.core.summary);
-                    setDamage(res[0].records.pvp.core.damage);
-                    setShots(res[0].records.pvp.core.shots);
-                    setMatches(res[0].records.pvp.matches.outcomes);
-                    setMatchStats(res[0].records.pvp.matches);
-                    setTimePlayed(res[0].records.pvp.time_played.human);
-                    setBreakdown(res[0].records.pvp.core.breakdowns.kills);
-                    setVehicle(res[0].records.pvp.core.breakdowns.kills.vehicles);
-                    setKd(res[0].records.pvp.core.kdr.toFixed(2));
+                result.forEach(res=>{
+                    if (res.records) {
+                        overall.current=res;
+                    } else if (Array.isArray(res)) {
+                        if (res.length>3) {
+                            medalsCollection.current=res;
+                        } else {
+                            ranked.current=res;
+                        }
+                    } else if (res.service_tag) {
+                        spartan.current=res;
+                    }
+                })
+                const setAll = () => {
+                    setSummary(overall.current.records.pvp.core.summary);
+                    setDamage(overall.current.records.pvp.core.damage);
+                    setShots(overall.current.records.pvp.core.shots);
+                    setMatches(overall.current.records.pvp.matches.outcomes);
+                    setMatchStats(overall.current.records.pvp.matches);
+                    setTimePlayed(overall.current.records.pvp.time_played.human);
+                    setBreakdown(overall.current.records.pvp.core.breakdowns.kills);
+                    setVehicle(overall.current.records.pvp.core.breakdowns.kills.vehicles);
+                    setKd(overall.current.records.pvp.core.kdr.toFixed(2));
 
-                    setRankedSummary(res[0].records.ranked.core.summary);
-                    setRankedDamage(res[0].records.ranked.core.damage);
-                    setRankedShots(res[0].records.ranked.core.shots);
-                    setRankedMatches(res[0].records.ranked.matches.outcomes);
-                    setRankedMatchStats(res[0].records.ranked.matches);
-                    setRankedTimePlayed(res[0].records.ranked.time_played.human);
-                    setRankedBreakdown(res[0].records.ranked.core.breakdowns.kills);
-                    const crossplay = [...res[1]].filter(obj=>obj.input==="crossplay");
-                    setRank(crossplay[0].response.all_time);
-                    setRankedKd(res[0].records.ranked.core.kdr.toFixed(2));
+                    setRankedSummary(overall.current.records.ranked.core.summary);
+                    setRankedDamage(overall.current.records.ranked.core.damage);
+                    setRankedShots(overall.current.records.ranked.core.shots);
+                    setRankedMatches(overall.current.records.ranked.matches.outcomes);
+                    setRankedMatchStats(overall.current.records.ranked.matches);
+                    setRankedTimePlayed(overall.current.records.ranked.time_played.human);
+                    setRankedBreakdown(overall.current.records.ranked.core.breakdowns.kills);
+                    const crossplay = ranked.current.find(obj=>obj.input==="crossplay");
+                    setRank(crossplay.response.all_time);
+                    setRankedKd(overall.current.records.ranked.core.kdr.toFixed(2));
 
-                    medals.current=res[0].records.pvp.core.breakdowns.medals;
+                    medals.current=overall.current.records.pvp.core.breakdowns.medals;
                     for (let i = 0; i < 15; i++) {
                         let newMedal = {};
-                        res[3].forEach(medal=>{
+                        medalsCollection.current.forEach(medal=>{
                            if(medal.id === medals.current[i].id){
                                 newMedal = {
                                     id:medal.id,
                                     name:medal.name,
                                     text:medal.description,
-                                    icon:medal.image_urls.medium,
+                                    icon:medal.image_urls.large,
                                     count:medals.current[i].count
                                 }
                                 newMedals.current =[...newMedals.current, newMedal];
@@ -77,7 +96,7 @@ const Details = props => {
                         });
                     };
                 }
-            setAll(result);
+            setAll();
             })
         }
         getStats();
@@ -90,34 +109,32 @@ const Details = props => {
 
         <h1 className="absolute text-3xl font-bold text-white ml-40 mt-6">Halo Fakepoint</h1>
            
-            <div className="flex justify-end">
-            <div className="avatar absolute w-8 h-8 mt-4 mr-6"><p className="text-center mt-1">NC</p></div>
-            </div>
+            <Avatar/>
 
         <div className="serviceRecord absolute flex w-11/12 top-20 ml-32 text-white z-10">
         <section className="w-1/2">
-            <section className="w-3/5">
+            <section className="sm:w-4/5 xl:w-3/5">
                 <h5 className="text-xl font-medium">Overall Gunfight Stats</h5>
-                <ul className="flex flex-wrap">
-                    <li>
+                <ul className="sm:flex-col xl:flex-row flex flex-wrap">
+                    <li className="sm:mb-2 xl:mb-0">
                     <GiDeathSkull className="gunfight -mb-5"/>
                     <span className="ml-8">Kills &nbsp; {summary.kills}</span>
                     </li>
-                    <li>
-                        <img className="-mb-5 ml-8" src={require("../Icons-IMG/tombstone.png")} alt="" width="20" height="20"/>
-                        <span className="ml-16">Deaths &nbsp; {summary.deaths}</span>
+                    <li className="sm:mb-2 xl:mb-0">
+                        <img className="-mb-5 xl:ml-8" src={require("../Icons-IMG/tombstone.png")} alt="" width="20" height="20"/>
+                        <span className="sm:ml-8 xl:ml-16">Deaths &nbsp; {summary.deaths}</span>
                     </li>
-                    <li>
-                        <FaPercentage className="gunfight kdratio ml-8"/>
-                        <span className="ml-16">K/D Ratio &nbsp; {kd}</span>
+                    <li className="sm:mb-2 xl:mb-0">
+                        <FaPercentage className="gunfight kdratio xl:ml-8"/>
+                        <span className="sm:ml-8 xl:ml-16">K/D Ratio &nbsp; {kd}</span>
                     </li>
 
-                    <div className="mt-4 flex">
-                    <li>
+                    <div className="xl:mt-4 flex sm:flex-col xl:flex-row">
+                    <li className="sm:mb-2">
                     <FaHandshake className="gunfight -mb-5"/>
                         <span className="ml-8">Assists &nbsp; {summary.assists}</span>
                     </li>
-                    <li className="ml-8">
+                    <li className="xl:ml-8">
                         <GiFire className="gunfight -mb-5"/>
                         <span className="ml-8">Highest Streak &nbsp; {summary.max_killing_spree}</span>
                     </li>
@@ -366,8 +383,8 @@ const Details = props => {
             </section>
         </div>
 
-        <section className="medals absolute top-3/4 ml-28 w-12/12 flex flex-wrap items-center z-10">
-            <h3 className="absolute mb-72 text-white text-2xl font-semibold">Medals</h3>
+        <section className="medals absolute bottom-0 ml-28 w-12/12 flex flex-wrap items-center z-10">
+            <h3 className="absolute -mt-72 text-white text-2xl font-semibold">Medals</h3>
             {
                 newMedals.current.map((medal, index)=>{
                     if (index > 14) {

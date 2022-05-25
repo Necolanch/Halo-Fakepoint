@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from "react";
 
 import SettingsNavigation from "../components/SettingsNavigation";
 import { FirstNameInput, LastNameInput, EmailInput, RightDisabled } from "../components/Input";
+import { SettingsAvatar } from "../components/Avatar";
 
 import {GamertagContext} from "../contexts/Gamertag"
 
@@ -64,10 +65,8 @@ const Settings = props => {
             <SettingsNavigation/>
 
             <h1 className="absolute text-3xl font-bold text-white ml-40 mt-6">Halo Fakepoint</h1>
-           
-            <div className="flex justify-end">
-            <div className="avatar absolute w-16 h-16 top-40 right-1/2 -mr-8 z-10"><p className="text-center mt-4 text-3xl">NC</p></div>
-            </div>
+            <SettingsAvatar/>
+            
 
             <h3 className="absolute w-screen text-center text-3xl uppercase font-semibold text-white mt-16">Settings</h3>
 

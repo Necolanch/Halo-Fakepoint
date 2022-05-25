@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 import SearchNavigation from "../components/SearchNavigation";
 import FriendsList from "../components/FriendsList";
+import {Avatar} from "../components/Avatar";
 
 import { GamertagContext } from "../contexts/Gamertag";
 
 import "../CSS/search.css";
 
-const Search = props => {
+const Search = () => {
   const [playerSearched, setPlayerSearched]=useState(false);
   const navigate = useNavigate();
   const {setSearchGamertag, setSearchSeason}=useContext(GamertagContext);
@@ -57,10 +58,8 @@ useEffect(()=>{
             <SearchNavigation/>
 
             <h1 className="absolute text-3xl font-bold text-white ml-40 mt-6">Halo Fakepoint</h1>
-           
-            <div className="flex justify-end">
-            <div className="avatar absolute w-8 h-8 mt-4 mr-6"><p className="text-center mt-1">NC</p></div>
-            </div>
+            
+            <Avatar/>
 
           <div className="search">
             <h3 className="absolute w-screen text-center text-3xl uppercase font-semibold text-white mt-16">Search</h3>

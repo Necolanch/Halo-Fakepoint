@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef, useContext} from "react";
 
 import SearchNavigation from "../components/SearchNavigation";
 import TopSearch from "../components/TopSearch";
+import {Avatar} from "../components/Avatar";
 
 import {GiDeathSkull, GiFire, GiHealthDecrease, GiInternalInjury, GiBullseye, GiTargeted, GiMailedFist, GiGrenade, GiNinjaHead, GiMissileSwarm, GiBattleTank, GiLaurelsTrophy, GiStopwatch, GiExitDoor, GiStarMedal} from "react-icons/gi";
 import {FaPercentage, FaHandshake, FaThumbsDown, FaEquals} from "react-icons/fa";
@@ -95,10 +96,7 @@ const SearchResult = props => {
         <SearchNavigation />
 
         <h1 className="absolute text-3xl font-bold text-white ml-40 mt-6">Halo Fakepoint</h1>
-           
-            <div className="flex justify-end">
-            <div className="avatar absolute w-8 h-8 mt-4 mr-6"><p className="text-center mt-1">NC</p></div>
-            </div>
+        <Avatar/>
 
         <TopSearch/>
 
