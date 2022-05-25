@@ -16,6 +16,11 @@ import "../CSS/details.css";
 const SearchResult = props => {
     const {searchGamertag, searchSeason} = useContext(GamertagContext);
 
+    const overall=useRef({});
+    const ranked=useRef({});
+    const spartan=useRef({});
+    const medalsCollection=useRef([]);
+
     const [summary, setSummary]=useState([]);
     const [damage, setDamage]=useState([]);
     const [shots, setShots]=useState([]);
@@ -44,33 +49,47 @@ const SearchResult = props => {
             await fetch(`http://localhost:3001/search/${searchGamertag}/${searchSeason}`)
             .then(response=>response.json())
             .then(result=>{
-                const setAll = (res) => {
-                    setSummary(res[0].records.pvp.core.summary);
-                    setDamage(res[0].records.pvp.core.damage);
-                    setShots(res[0].records.pvp.core.shots);
-                    setMatches(res[0].records.pvp.matches.outcomes);
-                    setMatchStats(res[0].records.pvp.matches);
-                    setTimePlayed(res[0].records.pvp.time_played.human);
-                    setBreakdown(res[0].records.pvp.core.breakdowns.kills);
-                    setVehicle(res[0].records.pvp.core.breakdowns.kills.vehicles);
-                    setKd(res[0].records.pvp.core.kdr.toFixed(2));
+                result.forEach(res=>{
+                    if (res.records) {
+                        overall.current=res;
+                    } else if (Array.isArray(res)) {
+                        if (res.length>3) {
+                            medalsCollection.current=res;
+                        } else {
+                            ranked.current=res;
+                        }
+                    } else if (res.service_tag) {
+                        spartan.current=res;
+                    }
+                })
 
-                    setRankedSummary(res[0].records.ranked.core.summary);
-                    setRankedDamage(res[0].records.ranked.core.damage);
-                    setRankedShots(res[0].records.ranked.core.shots);
-                    setRankedMatches(res[0].records.ranked.matches.outcomes);
-                    setRankedMatchStats(res[0].records.ranked.matches);
-                    setRankedTimePlayed(res[0].records.ranked.time_played.human);
-                    setRankedBreakdown(res[0].records.ranked.core.breakdowns.kills);
-                    const crossplay = [...res[1]].filter(obj=>obj.input==="crossplay");
-                    setRank(crossplay[0].response.all_time);
-                    setRankedKd(res[0].records.ranked.core.kdr.toFixed(2));
+                const setAll = () => {
+                    setSummary(overall.current.records.pvp.core.summary);
+                    setDamage(overall.current.records.pvp.core.damage);
+                    setShots(overall.current.records.pvp.core.shots);
+                    setMatches(overall.current.records.pvp.matches.outcomes);
+                    setMatchStats(overall.current.records.pvp.matches);
+                    setTimePlayed(overall.current.records.pvp.time_played.human);
+                    setBreakdown(overall.current.records.pvp.core.breakdowns.kills);
+                    setVehicle(overall.current.records.pvp.core.breakdowns.kills.vehicles);
+                    setKd(overall.current.records.pvp.core.kdr.toFixed(2));
+
+                    setRankedSummary(overall.current.records.ranked.core.summary);
+                    setRankedDamage(overall.current.records.ranked.core.damage);
+                    setRankedShots(overall.current.records.ranked.core.shots);
+                    setRankedMatches(overall.current.records.ranked.matches.outcomes);
+                    setRankedMatchStats(overall.current.records.ranked.matches);
+                    setRankedTimePlayed(overall.current.records.ranked.time_played.human);
+                    setRankedBreakdown(overall.current.records.ranked.core.breakdowns.kills);
+                    const crossplay = ranked.current.find(obj=>obj.input==="crossplay");
+                    setRank(crossplay.response.all_time);
+                    setRankedKd(overall.current.records.ranked.core.kdr.toFixed(2));
 
                     newMedals.current=[];
-                    medals.current=res[0].records.pvp.core.breakdowns.medals;
+                    medals.current=overall.current.records.pvp.core.breakdowns.medals;
                     for (let i = 0; i < 15; i++) {
                         let newMedal = {};
-                        res[3].forEach(medal=>{
+                        medalsCollection.current.forEach(medal=>{
                            if(medal.id === medals.current[i].id){
                                 newMedal = {
                                     id:medal.id,
@@ -84,7 +103,7 @@ const SearchResult = props => {
                         });
                     };
                 }
-            setAll(result);
+            setAll();
             })
         }
         getStats();
