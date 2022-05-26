@@ -27,6 +27,18 @@ const Search = () => {
     //If false do another ternary asking if errorStatus is true or false, if true return
     //search page with error message, if false return Search page as normal
     event.preventDefault();
+  
+    const searchForm =document.querySelector(".searchForm");
+    const lastChild = searchForm.lastChild;
+    if (lastChild.className.includes("error")) {
+      searchForm.removeChild(lastChild) 
+    }
+    const error = document.createElement("div");
+    searchForm.append(error);
+    if (szn>2) {
+        error.className="error flex items-center mt-8";
+        error.innerHTML=`<img class="errorIcon" src=${require("../Icons-IMG/error.png")} alt="" width="35" height="35"/> <span class="errorMessage text-red-500 ml-4">SEASON 2 IS CURRENT SEASON</span>`;
+    }
     setSearchGamertag(gt);
     setSearchSeason(parseInt(szn));
     await fetch(`http://localhost:3001/search/${gt}/${szn}`)
@@ -36,10 +48,8 @@ const Search = () => {
         if (document.querySelector(".error")) {
           return null;
         } else {
-        const error = document.createElement("div");
         error.className="error flex items-center mt-8";
         error.innerHTML=`<img class="errorIcon" src=${require("../Icons-IMG/error.png")} alt="" width="35" height="35"/> <span class="errorMessage text-red-500 ml-4">PLAYER NOT FOUND</span>`;
-        document.querySelector(".searchForm").appendChild(error);
         }
       } else{
         setPlayerSearched(true)
@@ -71,7 +81,7 @@ useEffect(()=>{
                 <input className="searchInput w-11/12 h-16 p-2 text-2xl" ref={gamertag} placeholder="Gamertag" />
               </div>
               <div className="inputBorder w-1/6 h-24 mt-8 border border-white flex justify-center items-center">
-                <input className="searchInput w-11/12 h-16 p-2 text-2xl" ref={season} placeholder="Season" type="number" />
+                <input className="searchInput w-11/12 h-16 p-2 text-2xl" ref={season} placeholder="Season" type="number"/>
               </div>
 
               <div className="inputBorder border p-2 mt-10">
