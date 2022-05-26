@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import {ShepherdTour, TourMethods} from "react-shepherd";
 import Start from "../components/Start";
 
@@ -21,6 +21,11 @@ const tourOptions = {
     {
       id:"intro",
       buttons:[
+        {
+          classes:"shepherd-button-secondary",
+          text:"Exit",
+          type:"cancel"
+        },
         {
           classes:"halo-button",
           text:"Begin",
@@ -139,7 +144,7 @@ const tourOptions = {
           {
             classes:"shepherd-button-primary",
             text:"Finish",
-            type:"cancel"
+            type:"complete"
           }
         ],
         text:[
@@ -149,6 +154,11 @@ const tourOptions = {
   ]
 
 const Home = props => {
+    const overall=useRef({});
+    const ranked=useRef({});
+    const spartan=useRef({});
+    const medalsCollection=useRef([]);
+
     const [summary, setSummary] = useState([]);
     const [breakdowns, setBreakdowns]=useState([]);
     const [timePlayed, setTimePlayed]=useState([]);
@@ -162,18 +172,32 @@ const Home = props => {
             await fetch(`http://localhost:3001/`)
             .then(response=>response.json())
             .then(result=>{
-                const setAll = (res) => {
-                setSummary(res[0].records.pvp.core.summary);
-                setBreakdowns(res[0].records.pvp.core.breakdowns.kills);
-                setTimePlayed(res[0].records.pvp.time_played.human);
-                setWins(res[0].records.pvp.matches.outcomes.wins);
-                setKd(res[0].records.pvp.core.kdr.toFixed(2));
-
-                const crossplay = [...res[1]].filter(obj=>obj.input==="crossplay");
-                setRank(crossplay[0].response.all_time);
-                setId(res[2].service_tag);
+              result.forEach(res=>{
+                if (res.records) {
+                    overall.current=res;
+                } else if (Array.isArray(res)) {
+                    if (res.length>3) {
+                        medalsCollection.current=res;
+                    } else {
+                        ranked.current=res;
+                    }
+                } else if (res.service_tag) {
+                    spartan.current=res;
                 }
-            setAll(result);
+            })
+
+                const setAll = () => {
+                setSummary(overall.current.records.pvp.core.summary);
+                setBreakdowns(overall.current.records.pvp.core.breakdowns.kills);
+                setTimePlayed(overall.current.records.pvp.time_played.human);
+                setWins(overall.current.records.pvp.matches.outcomes.wins);
+                setKd(overall.current.records.pvp.core.kdr.toFixed(2));
+
+                const crossplay = ranked.current.find(obj=>obj.input==="crossplay");
+                setRank(crossplay.response.all_time);
+                setId(spartan.current.service_tag);
+                }
+            setAll();
             })
         }
         getStats();

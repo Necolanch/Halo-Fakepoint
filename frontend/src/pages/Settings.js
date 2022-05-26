@@ -18,20 +18,48 @@ const Settings = props => {
   const {gamertag, firstNameInput, lastNameInput, emailInput} = useContext(GamertagContext);
 
   useEffect(()=>{
+
     const getUser = async () => {
       await fetch(`http://localhost:3001/users/${gamertag.current}`)
       .then(response=>response.json())
       .then(result=>{
+          if(result===null){
+            fetch(`http://localhost:3001/users`, {
+                method:"POST",
+                headers:{
+                  "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                  firstName:"Nicholas",
+                  lastName:"Cruz",
+                  email:"necolanch@gmail.com",
+                  gamertag:gamertag.current
+                })
+              })
+              .then(response=>response.json())
+              .then(result=>{
+                setFirstName(result.firstName);
+                setLastName(result.lastName);
+                setGt(result.gamertag);
+                setEmail(result.email);
+              })
+              .catch(err=>{
+                throw Error(err.message);
+              })
+          } else{
         setFirstName(result.firstName);
         setLastName(result.lastName);
         setGt(result.gamertag);
         setEmail(result.email);
+        }
       })
       .catch(err=>{
         throw Error(err.message);
       })
     }
-    getUser();
+    return ()=>{
+      getUser();
+    };
   }, [gamertag])
 
   const updateAccount = async (e, first, last, email) => {
@@ -50,7 +78,6 @@ const Settings = props => {
     })
     .then(response=>response.json())
     .then(result=>{
-      console.log(result);
       setFirstName(result.firstName);
       setLastName(result.lastName);
       setEmail(result.email);

@@ -10,7 +10,6 @@ router.get("/:gamertag", (req, res)=>{
     .exec()
     .then(result=>{
         return res.status(200).json(result);
-        
     })
     .catch(err=>{
         res.status(500).json({
@@ -28,16 +27,33 @@ router.post("/", (req, res)=>{
         gamertag:req.body.gamertag,
         email:req.body.email
     })
-    newUser.save()
+    User.find({gamertag:req.body.gamertag})
+    .exec()
     .then(result=>{
-        res.status(200).json(result)
+        if (result.length>0) {
+            return res.status(406).json({
+                message:"User already added"
+            })
+        }
+
+        newUser.save()
+        .then(result=>{
+            res.status(200).json(result);
+        })
+        .catch(err=>{
+            res.status(500).json({
+                error:{
+                    message:err.message
+                }
+        })
+        })
     })
     .catch(err=>{
         res.status(500).json({
             error:{
-                message:err.message
+                message:`Unable to save user with gamertag ${req.body.gamertag}`
             }
-    })
+        })
     })
 });
 
