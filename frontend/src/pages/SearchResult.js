@@ -62,8 +62,25 @@ const SearchResult = props => {
                         spartan.current=res;
                     }
                 })
-
+                if (overall.current.records.pvp===null) {
+                    const serviceRecord = document.querySelector(".serviceRecord");
+                    const children = [...serviceRecord.children];
+                    children.forEach(child=>child.className+=" hidden");
+                    serviceRecord.className="serviceRecord absolute flex justify-center w-11/12 top-20 ml-32 text-white z-10"
+                    const error = document.createElement("div");
+                    error.className="error flex items-center my-auto";
+                    error.innerHTML=`<img class="errorIcon" src=${require("../Icons-IMG/error.png")} alt="" width="50" height="50"/> <span class="errorMessage text-red-500 text-xl font-semibold ml-4">NOT A HALO PLAYER</span>`;
+                    serviceRecord.append(error);
+                } else{
                 const setAll = () => {
+                    const serviceRecord = document.querySelector(".serviceRecord");
+                    const children = [...serviceRecord.children];
+                    children.forEach(child=>{
+                        if (child.classList.contains("error")) {
+                            child.innerHTML="";
+                        }
+                        child.classList.remove("hidden")
+                    });
                     setSummary(overall.current.records.pvp.core.summary);
                     setDamage(overall.current.records.pvp.core.damage);
                     setShots(overall.current.records.pvp.core.shots);
@@ -104,6 +121,7 @@ const SearchResult = props => {
                     };
                 }
             setAll();
+                }
             })
         }
         getStats();
@@ -219,7 +237,7 @@ const SearchResult = props => {
                 </ul>
               </section>
 
-              <section className="w-3/4 mt-8">
+              <section className="w-4/5 mt-8">
                 <h5 className="text-xl font-medium">Overall Match Stats</h5>
                 <ul className="flex flex-wrap">
                     <li>
@@ -352,7 +370,7 @@ const SearchResult = props => {
                 </ul>
               </section>
 
-              <section className="w-3/4 mt-8">
+              <section className="w-4/5 mt-8">
                 <h5 className="text-xl font-medium">Ranked Match Stats</h5>
                 <ul className="flex flex-wrap">
                     <li>
@@ -389,9 +407,9 @@ const SearchResult = props => {
                 </ul>
               </section>
             </section>
-        </div>
+        
 
-        <section className="medals absolute top-3/4 ml-28 w-12/12 flex flex-wrap items-center z-10">
+        <section className="medals absolute -bottom-80 w-full flex flex-wrap items-center z-10">
             <h3 className="absolute mb-72 text-white text-2xl font-semibold">Medals</h3>
             {
                 newMedals.current.map((medal, index)=>{
@@ -399,9 +417,9 @@ const SearchResult = props => {
                         return null;
                     }
                     return(
-                        <div key={medal.id} className="w-52 z-10 mb-10 flex items-center p-2 text-white">
-                        <span className="text-lg">{medal.count}</span><span><img src={medal.icon} alt="" width="50" height="50"/></span>
-                        <div className="font-medium">{medal.name}
+                        <div key={medal.id} className="w-48 z-10 mb-10 flex items-center p-2 text-white">
+                        <span className="text-lg">{medal.count}</span><span className="ml-2"><img src={medal.icon} alt="" width="50" height="50"/></span>
+                        <div className="font-medium ml-2">{medal.name}
                         <p className="text-xs">{medal.text}</p>
                         </div>
                         </div>
@@ -409,6 +427,7 @@ const SearchResult = props => {
                 })
             }
         </section>
+        </div>
 
         <img className="w-screen h-screen opacity-10 grayscale" src={require("../Icons-IMG/background.jpg")} alt="" width="2000" height="1270" />
         </div>

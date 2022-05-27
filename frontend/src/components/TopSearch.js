@@ -25,10 +25,10 @@ const TopSearch = props => {
           searchForm.removeChild(lastChild) 
         }
         const error = document.createElement("div");
-        searchForm.append(error);
         if (szn>2) {
             error.className="error flex items-center ml-8";
             error.innerHTML=`<img class="errorIcon" src=${require("../Icons-IMG/error.png")} alt="" width="35" height="35"/> <span class="errorMessage text-red-500 ml-4">SEASON 2 IS CURRENT SEASON</span>`;
+            searchForm.append(error);
         }
         setSearchGamertag(gt);
         setSearchSeason(parseInt(szn));
@@ -41,6 +41,7 @@ const TopSearch = props => {
             } else {
             error.className="error flex items-center ml-8";
             error.innerHTML=`<img class="errorIcon" src=${require("../Icons-IMG/error.png")} alt="" width="35" height="35"/> <span class="errorMessage text-red-500 ml-4">PLAYER NOT FOUND</span>`;
+            searchForm.append(error);
             }
           } else{
             setPlayerSearched(true)

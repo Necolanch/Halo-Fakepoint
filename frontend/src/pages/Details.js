@@ -381,9 +381,9 @@ const Details = props => {
                 </ul>
               </section>
             </section>
-        </div>
+        
 
-        <section className="medals absolute bottom-0 ml-28 w-12/12 flex flex-wrap items-center z-10">
+        <section className="medals absolute -bottom-80 w-full flex flex-wrap items-center z-10">
             <h3 className="absolute -mt-72 text-white text-2xl font-semibold">Medals</h3>
             {
                 newMedals.current.map((medal, index)=>{
@@ -391,9 +391,9 @@ const Details = props => {
                         return null;
                     }
                     return(
-                        <div key={medal.id} className="w-52 z-10 mb-10 flex items-center p-2 text-white">
-                        <span className="text-lg">{medal.count}</span><span><img src={medal.icon} alt="" width="50" height="50"/></span>
-                        <div className="font-medium">{medal.name}
+                        <div key={medal.id} className="w-48 z-10 mb-10 flex items-center p-2 text-white">
+                        <span className="text-lg">{medal.count}</span><span className="ml-2"><img src={medal.icon} alt="" width="50" height="50"/></span>
+                        <div className="font-medium ml-2">{medal.name}
                         <p className="text-xs">{medal.text}</p>
                         </div>
                         </div>
@@ -401,6 +401,7 @@ const Details = props => {
                 })
             }
         </section>
+        </div>
 
         <img className="w-screen h-screen opacity-10 grayscale" src={require("../Icons-IMG/background.jpg")} alt="" width="2000" height="1270" />
         </div>
