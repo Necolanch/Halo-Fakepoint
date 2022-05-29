@@ -96,7 +96,7 @@ const Settings = () => {
 
             <h3 className="absolute w-screen text-center text-3xl uppercase font-semibold text-white mt-16">Settings</h3>
 
-            <form onSubmit={e=>updateAccount(e, firstNameInput.current.value, lastNameInput.current.value, emailInput.current.value)} className="searchForm absolute w-2/5 h-3/5 flex flex-col items-center top-1/3 left-1/4 ml-20 z-10 border">
+            <form onSubmit={e=>updateAccount(e, firstNameInput.current.value, lastNameInput.current.value, emailInput.current.value)} className="searchForm inputBorder absolute w-2/5 h-3/5 flex flex-col items-center top-1/3 left-1/4 ml-20 z-10 border">
               <div className="mt-40">
                 <div className="flex mb-20">
 
