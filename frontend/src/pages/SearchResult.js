@@ -408,7 +408,6 @@ const SearchResult = props => {
               </section>
             </section>
         
-
         <section className="medals absolute -bottom-80 w-full flex flex-wrap items-center z-10">
             <h3 className="absolute mb-72 text-white text-2xl font-semibold">Medals</h3>
             {
@@ -428,7 +427,7 @@ const SearchResult = props => {
             }
         </section>
         </div>
-
+        
         <img className="w-screen h-screen opacity-10 grayscale" src={require("../Icons-IMG/background.jpg")} alt="" width="2000" height="1270" />
         </div>
     )

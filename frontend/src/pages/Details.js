@@ -382,7 +382,6 @@ const Details = props => {
               </section>
             </section>
         
-
         <section className="medals absolute -bottom-80 w-full flex flex-wrap items-center z-10">
             <h3 className="absolute -mt-72 text-white text-2xl font-semibold">Medals</h3>
             {

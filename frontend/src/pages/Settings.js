@@ -8,7 +8,7 @@ import {GamertagContext} from "../contexts/Gamertag"
 
 import "../CSS/settings.css";
 
-const Settings = props => {
+const Settings = () => {
   
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -18,7 +18,6 @@ const Settings = props => {
   const {gamertag, firstNameInput, lastNameInput, emailInput} = useContext(GamertagContext);
 
   useEffect(()=>{
-
     const getUser = async () => {
       await fetch(`http://localhost:3001/users/${gamertag.current}`)
       .then(response=>response.json())

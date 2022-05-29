@@ -2,7 +2,6 @@ import React, {useState, useRef, useEffect} from "react";
 import {ShepherdTour, TourMethods} from "react-shepherd";
 import Start from "../components/Start";
 
-//import OverviewChart from "../components/OverviewChart";
 import HomeNavigation from "../components/HomeNavigation";
 import {Avatar} from "../components/Avatar";
 
@@ -14,7 +13,19 @@ import "shepherd.js/dist/css/shepherd.css";
 
 const tourOptions = {
     useModalOverlay: true,
-    keyboardNavigation: false
+    keyboardNavigation: false,
+    defaultStepOptions:{
+      cancelIcon:{
+        enabled:true
+      },
+      when:{
+        cancel: (()=>{
+          const body = document.querySelector("body");
+          const children = [...body.children];
+          children.forEach(child=>child.classList.remove("shepherd-modal-is-visible"))
+        })
+      }
+    }
 };
 
   const steps = [
@@ -34,13 +45,14 @@ const tourOptions = {
       ],
       text:[
         "Welcome to Halo Fakepoint! A mock of Halo Waypoint developed by Nicholas Cruz connecting to the HaloDotAPI for in game stats. This guide will highlight some key areas of the website for you."
-      ]
+      ],
     },
     {
       id:"second",
       attachTo:{
         element:".overview",
-        on:"left"
+        on:"left",
+        highlightClass:"attach"
       },
       buttons:[
         {
@@ -213,7 +225,7 @@ const Home = props => {
             <HomeNavigation/>
             <h1 className="absolute text-3xl font-bold text-white ml-40 mt-6">Halo Fakepoint</h1>
             <Avatar/>
-        <section className="overview absolute w-screen text-white flex justify-end mt-72 -ml-40 text-xl">
+        <section className="overview absolute left-2/4 w-2/5 text-white flex justify-end mt-72 text-xl z-10">
             <h3 className="-mt-32 text-2xl font-semibold">Welcome Spartan <span className="serviceTag">{id}</span>!</h3>
           <div className="-mt-10 -mr-80 text-2xl font-semibold underline uppercase">
             Overview
