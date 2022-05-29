@@ -137,7 +137,11 @@ const SearchResult = props => {
 
         <TopSearch/>
 
-        <div className="serviceRecord absolute flex w-11/12 top-20 ml-32 text-white z-10">
+        <div className="absolute w-screen flex justify-end mt-16 -ml-20 mb-10 text-white text-xl font-medium">
+           <img className="mr-1 -mt-1" src={spartan.current.emblem_url} alt="" width="35" height="35"/> {`${searchGamertag}`}
+        </div>
+
+        <div className="serviceRecord absolute flex w-11/12 top-24 ml-32 text-white z-10">
         <section className="w-1/2">
             <section className="w-3/5">
                 <h5 className="text-xl font-medium">Overall Gunfight Stats</h5>
