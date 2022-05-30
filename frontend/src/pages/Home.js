@@ -23,6 +23,11 @@ const tourOptions = {
           const body = document.querySelector("body");
           const children = [...body.children];
           children.forEach(child=>child.classList.remove("shepherd-modal-is-visible"))
+        }),
+        complete: (()=>{
+          const body = document.querySelector("body");
+          const children = [...body.children];
+          children.forEach(child=>child.classList.remove("shepherd-modal-is-visible"))
         })
       }
     }
