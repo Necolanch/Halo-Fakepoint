@@ -1,6 +1,6 @@
 # Halo Fakepoint
 
-![](halo.svg)
+![Halo logo](https://github.com/Necolanch/Halo-Fakepoint/blob/main/frontend/public/halo.svg)
 
 ### Nicholas Cruz
 
