@@ -5,6 +5,7 @@
 <br>
 
 ## Starting app
+### Download ZIP from Code dropdown
 ### cd to frontend and server and npm install in both
 ### npm start frontend
 ### npm run devstart server
