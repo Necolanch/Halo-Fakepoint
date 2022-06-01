@@ -7,8 +7,8 @@
 ## Starting app
 ### Download ZIP from Code dropdown
 ### cd to frontend and server and npm install in both
-### npm start frontend
-### npm run devstart server
+### frontend npm start
+### server npm run devstart
 
 ### For testing purposes:
 Search gamertags: Zeny IC, Nick vwp, Falcated
