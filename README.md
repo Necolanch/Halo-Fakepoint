@@ -57,17 +57,19 @@ This week I accomplished becoming more comfortable and confident in my work with
 
 Next I plan to prioritize refactoring my code to make it as dynamic as possible. I have to work with my calls to the API I am utilizing and really make the way I am utilizing the responses scaleable. After that I will be polishing my styling to make it a bit more responsive or at least friendly to some reduced sizes.
 
-- API Used: [Halo API](https://autocode.com/halo/)
-- Mongoose library used: [Mongoose Docs](https://mongoosejs.com/)
-- React-icons library used: [React-icons](https://react-icons.github.io/react-icons)
+[Halo API](https://autocode.com/halo/)
+[Mongoose Docs](https://mongoosejs.com/)
+[React-icons](https://react-icons.github.io/react-icons)
 
 ### Milestone 4
 
-My final stand up...
+This week I refactored code and polished the styling of the application with a mixture of Tailwind and vanilla CSS. I chose Tailwind because it had been a few months since I used it, but I really enjoyed it. Tailind takes mobile first development to a new level and I wanted to familiarize myself again with it. I cleaned up some spacing in the code and removed unnecessary comments. I added my .env file that was missing from last week and fixed the no initial user in the database issue. I made the results of my API calls more dynamic. I moved around some JSX in the SearchResult and Details pages so the medals section would be inside the whole service record section. I also adjusted the styling of the overview section on the home page so the tour step that highlights it looks better, but is still in the same position as before. I utilized the emblem retrieved from gamertag search as profile picture for account user. I also utilized the emblem from each successful search result and the searched gamertag to indicate the user was successfully searched. I want to create a sign up/sign in page for real users to use the website in the future.
 
-<br>
-<br>
-<hr/>
+### For testing purposes:
+Search gamertags: Zeny IC, Nick vwp, Falcated
+Search seasons: 1, 2
+
+Refresh main search page and settings page after input to see changes remain to FriendsList and Settings
 
 # Project Overview
 
