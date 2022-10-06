@@ -31,7 +31,7 @@ const Settings = () => {
                 body:JSON.stringify({
                   firstName:"Nicholas",
                   lastName:"Cruz",
-                  email:"necolanch@gmail.com",
+                  email:"necolynche@gmail.com",
                   gamertag:gamertag.current
                 })
               })

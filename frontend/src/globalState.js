@@ -1,9 +1,9 @@
 import {useRef, useState} from "react";
 
 const GlobalState = () => {
-    const gamertag = useRef("NecolanchTTV");
+    const gamertag = useRef("Necolanch");
     const [searchGamertag, setSearchGamertag]=useState("");
-    const [searchSeason, setSearchSeason]=useState("");
+    const [searchPlatform, setSearchPlatform]=useState("");
     const firstNameInput = useRef("");
     const lastNameInput = useRef("");
     const emailInput = useRef("");
@@ -11,12 +11,12 @@ const GlobalState = () => {
     return {
         gamertag,
         searchGamertag,
-        searchSeason,
+        searchPlatform,
         firstNameInput,
         lastNameInput,
         emailInput,
         setSearchGamertag, 
-        setSearchSeason
+        setSearchPlatform
     }
 }
 

@@ -6,7 +6,7 @@ const HomeNavigation = () => {
     return(
         <nav className="navigation absolute h-screen flex-auto flex-col w-24 z-10">
                 <Link to="/">
-                <img className="mx-auto mb-60 relative top-10 hover:cursor-pointer" src={require("../Icons-IMG/unsc.png")} alt="UNSC logo" width="45" height="72" />
+                <img className="mx-auto mb-60 relative top-10 hover:cursor-pointer" src={require("../Icons-IMG/splitgate.png")} alt="UNSC logo" width="45" height="72" />
                 </Link>
 
                 <Link to="/">

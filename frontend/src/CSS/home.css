@@ -1,5 +1,5 @@
 .navigation{
-    background-color:#507D2A;
+    background-color:#218EAC;
 }
 
 .home, .search, .settings, .details{
@@ -11,17 +11,12 @@
 }
 
 .home-icon:hover, .search-icon:hover, .settings-icon:hover, .details-icon:hover{
-    filter: invert(92%) sepia(19%) saturate(3979%) hue-rotate(336deg) brightness(97%) contrast(92%);
+    filter: invert(66%) sepia(76%) saturate(6144%) hue-rotate(335deg) brightness(99%) contrast(85%);
     cursor:pointer;
 }
 
 .serviceTag{
     color:#EFB82A;
-}
-
-.avatar{
-    background-color:#7ea9ce;
-    border-radius: 50%;
 }
 
 .skull, .headshots, .stopwatch, .trophy, .percentage, .medal{

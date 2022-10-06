@@ -8,12 +8,12 @@ import "../CSS/search.css";
 const TopSearch = props => {
     const [playerSearched, setPlayerSearched]=useState(false);
     const navigate = useNavigate();
-    const {setSearchGamertag, setSearchSeason}=useContext(GamertagContext);
+    const {setSearchGamertag, setSearchPlatform}=useContext(GamertagContext);
 
     const gamertag=useRef("");
     const season=useRef("");
 
-    const searchPlayer = async(gt, szn, event) => {
+    const searchPlayer = async(gt, platform, event) => {
         //Use state variable for if a player is searched, set to false initially. If that is true
         //and valid, return should be of Details page component with gamertag prop passed in
         //If false do another ternary asking if errorStatus is true or false, if true return
@@ -25,17 +25,17 @@ const TopSearch = props => {
           searchForm.removeChild(lastChild) 
         }
         const error = document.createElement("div");
-        if (szn>2) {
+        if (platform!=="xbl" && platform!=="psn" && platform!=="steam") {
             error.className="error flex items-center ml-8";
-            error.innerHTML=`<img class="errorIcon" src=${require("../Icons-IMG/error.png")} alt="" width="35" height="35"/> <span class="errorMessage text-red-500 ml-4">SEASON 2 IS CURRENT SEASON</span>`;
+            error.innerHTML=`<img class="errorIcon" src=${require("../Icons-IMG/error.png")} alt="" width="35" height="35"/> <span class="errorMessage text-red-500 ml-4">PLATFORM NOT FOUND</span>`;
             searchForm.append(error);
         }
         setSearchGamertag(gt);
-        setSearchSeason(parseInt(szn));
-        await fetch(`http://localhost:3001/search/${gt}/${szn}`)
+        setSearchPlatform(platform);
+        await fetch(`http://localhost:3001/search/${platform}/${gt}`)
         .then(response=>response.json())
         .then(result=>{
-          if (result.message) {
+          if (result.errors) {
             if (document.querySelector(".error")) {
               return null;
             } else {
@@ -61,7 +61,7 @@ const TopSearch = props => {
                 <input className="searchInput p-1" ref={gamertag}placeholder="Gamertag"></input>
             </div>
             <div className="inputBorder border p-1 ml-6 w-24">
-                <input className="searchInput w-full p-1" type="number" ref={season}placeholder="Season"></input>
+                <input className="searchInput w-full p-1" type="text" ref={season}placeholder="Platform"></input>
             </div>
             <div className="inputBorder border ml-6 p-1">
             <button className="searchButton p-1 w-20" type="submit">Search</button>

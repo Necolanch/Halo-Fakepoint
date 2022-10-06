@@ -28,7 +28,7 @@ app.use((req, res, next)=>{
 })
 
 app.get("/",(req,res,next)=>{
-    generalStats("NecolanchTTV", 1)
+    generalStats("steam", "76561198278688829")
     .then(result=>{
         return res.status(200).json(result);
     })

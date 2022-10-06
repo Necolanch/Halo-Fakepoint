@@ -12,7 +12,7 @@ import "../CSS/search.css";
 const Search = () => {
   const [playerSearched, setPlayerSearched]=useState(false);
   const navigate = useNavigate();
-  const {setSearchGamertag, setSearchSeason}=useContext(GamertagContext);
+  const {setSearchGamertag, setSearchPlatform}=useContext(GamertagContext);
 
   //Make a function to be called that handles the form submission
   //When form is submitted, retrieve value from the search input and return Details page view
@@ -21,7 +21,7 @@ const Search = () => {
   const gamertag=useRef("");
   const season=useRef("");
 
-  const searchPlayer = async(gt, szn, event) => {
+  const searchPlayer = async(gt, platform, event) => {
     //Use state variable for if a player is searched, set to false initially. If that is true
     //and valid, return should be of Details page component with gamertag prop passed in
     //If false do another ternary asking if errorStatus is true or false, if true return
@@ -35,16 +35,16 @@ const Search = () => {
     }
     const error = document.createElement("div");
     searchForm.append(error);
-    if (szn>2) {
+    if (platform!=="xbl" && platform!=="psn" && platform!=="steam") {
         error.className="error flex items-center mt-8";
-        error.innerHTML=`<img class="errorIcon" src=${require("../Icons-IMG/error.png")} alt="" width="35" height="35"/> <span class="errorMessage text-red-500 ml-4">SEASON 2 IS CURRENT SEASON</span>`;
+        error.innerHTML=`<img class="errorIcon" src=${require("../Icons-IMG/error.png")} alt="" width="35" height="35"/> <span class="errorMessage text-red-500 ml-4">PLATFORM NOT FOUND</span>`;
     }
     setSearchGamertag(gt);
-    setSearchSeason(parseInt(szn));
-    await fetch(`http://localhost:3001/search/${gt}/${szn}`)
+    setSearchPlatform(platform);
+    await fetch(`http://localhost:3001/search/${platform}/${gt}`)
     .then(response=>response.json())
     .then(result=>{
-      if (result.message) {
+      if (result.errors) {
         if (document.querySelector(".error")) {
           return null;
         } else {
@@ -67,7 +67,7 @@ useEffect(()=>{
         <div className="wrapper h-screen">
             <SearchNavigation/>
 
-            <h1 className="absolute text-3xl font-bold text-white ml-40 mt-6">Halo Fakepoint</h1>
+            <h1 className="absolute text-3xl font-bold text-white ml-40 mt-6">Splitgate Data Portal</h1>
             
             <Avatar/>
 
@@ -75,13 +75,13 @@ useEffect(()=>{
             <h3 className="absolute w-screen text-center text-3xl uppercase font-semibold text-white mt-16">Search</h3>
         
             <form onSubmit={event=>searchPlayer(gamertag.current.value, season.current.value, event)} className="searchForm absolute w-screen flex flex-col items-center mt-96 z-10">
-            <p className="text-xl text-white font-medium">FIND SERVICE RECORDS OF OTHER PLAYERS TO COMPARE TO YOURS</p>
+            <p className="text-xl text-white font-medium">FIND STATS OF OTHER PLAYERS TO COMPARE TO YOURS</p>
 
               <div className="inputBorder w-1/2 h-24 border border-white flex justify-center items-center">
-                <input className="searchInput w-11/12 h-16 p-2 text-2xl" ref={gamertag} placeholder="Gamertag" />
+                <input className="searchInput w-11/12 h-16 p-2 text-2xl" ref={gamertag} placeholder="Gamertag (SteamID64 for Steam)" />
               </div>
               <div className="inputBorder w-1/6 h-24 mt-8 border border-white flex justify-center items-center">
-                <input className="searchInput w-11/12 h-16 p-2 text-2xl" ref={season} placeholder="Season" type="number"/>
+                <input className="searchInput w-11/12 h-16 p-2 text-2xl" ref={season} placeholder="steam/xbl/psn" type="text"/>
               </div>
 
               <div className="inputBorder border p-2 mt-10">

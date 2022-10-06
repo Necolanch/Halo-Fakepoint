@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import {ShepherdTour, TourMethods} from "react-shepherd";
 import Start from "../components/Start";
 
@@ -171,49 +171,30 @@ const tourOptions = {
   ]
 
 const Home = props => {
-    const overall=useRef({});
-    const ranked=useRef({});
-    const spartan=useRef({});
-    const medalsCollection=useRef([]);
-
-    const [summary, setSummary] = useState([]);
-    const [breakdowns, setBreakdowns]=useState([]);
+    const [kills, setKills] = useState([]);
+    const [headshots,setHeadshots]=useState([]);
     const [timePlayed, setTimePlayed]=useState([]);
     const [wins, setWins]=useState([]);
-    const [kd, setKd]=useState([]);
+    const [teabags, setTeabags]=useState([]);
     const [rank, setRank]=useState([]);
-    const [id, setId]=useState([]);
+    const [gamertag, setGamertag]=useState([]);
 
     useEffect(() => {
         const getStats = async () => {
             await fetch(`http://localhost:3001/`)
             .then(response=>response.json())
             .then(result=>{
-              result.forEach(res=>{
-                if (res.records) {
-                    overall.current=res;
-                } else if (Array.isArray(res)) {
-                    if (res.length>3) {
-                        medalsCollection.current=res;
-                    } else {
-                        ranked.current=res;
-                    }
-                } else if (res.service_tag) {
-                    spartan.current=res;
-                }
-            })
-
-                const setAll = () => {
-                setSummary(overall.current.records.pvp.core.summary);
-                setBreakdowns(overall.current.records.pvp.core.breakdowns.kills);
-                setTimePlayed(overall.current.records.pvp.time_played.human);
-                setWins(overall.current.records.pvp.matches.outcomes.wins);
-                setKd(overall.current.records.pvp.core.kdr.toFixed(2));
-
-                const crossplay = ranked.current.find(obj=>obj.input==="crossplay");
-                setRank(crossplay.response.all_time);
-                setId(spartan.current.service_tag);
-                }
+              const overall=result.data.segments.find(obj=>obj.type==="overview");
+              const ranked4v4=result.data.segments.find(obj=>obj.metadata.name==="Ranked 4v4");
+              const setAll = () => {
+                setKills(overall.stats.kills.displayValue);
+                setHeadshots(overall.stats.headshotKills.displayValue)
+                setTimePlayed(overall.stats.timePlayed.displayValue)
+                setWins(overall.stats.wins.displayValue)
+                setTeabags(overall.stats.teabags.displayValue)
+                setRank(ranked4v4.stats.rankLevel.metadata.rankName)
+                setGamertag(result.data.platformInfo.platformUserHandle)
+              }
             setAll();
             })
         }
@@ -228,34 +209,35 @@ const Home = props => {
           </TourMethods>
         <div className="wrapper h-screen">
             <HomeNavigation/>
-            <h1 className="absolute text-3xl font-bold text-white ml-40 mt-6">Halo Fakepoint</h1>
+            <h1 className="absolute text-3xl font-bold text-white ml-40 mt-6">Spligate Data Portal</h1>
             <Avatar/>
         <section className="overview absolute left-2/4 w-2/5 text-white flex justify-end mt-72 text-xl z-10">
-            <h3 className="-mt-32 text-2xl font-semibold">Welcome Spartan <span className="serviceTag">{id}</span>!</h3>
-          <div className="-mt-10 -mr-80 text-2xl font-semibold underline uppercase">
+            <h3 className="-mt-32 text-2xl font-semibold">Welcome <span className="serviceTag">{gamertag}</span>!</h3>
+          <div className="-mt-10 -mr-64 text-2xl font-semibold underline uppercase">
             Overview
           </div>
             <ul className="text-right mr-28">
                 <li className="mb-4">
-                    <GiDeathSkull className="skull -mb-6 ml-24"/> 
-                    Kills &nbsp; {summary.kills}
+                    <GiDeathSkull className="skull -mb-6 ml-12"/>
+                    Kills &nbsp; {kills}
                 </li> 
-                <li className="mb-4 mr-6"> 
-                <GiTargeted className="headshots -mb-6 ml-6"/>
-                Headshots &nbsp; {breakdowns.headshots}</li>
+                <li className="mb-4"> 
+                <GiTargeted className="headshots -mb-6"/>
+                Headshots &nbsp; {headshots}
+                </li>
                 <li className="mb-4">
-                <GiStopwatch className="stopwatch -mb-6 -ml-10"/>
+                <GiStopwatch className="stopwatch -mb-6 -ml-12"/>
                     Time Played &nbsp; {timePlayed}</li>
             </ul>
             <ul className="">
                 <li className="wins">
                     {wins} &nbsp; Wins <GiLaurelsTrophy className="trophy -mt-7 ml-24"/>
                 </li>
-                <li className="kd ml-6">
-                    {kd} &nbsp; KDR <FaPercentage className="percentage -mt-6 ml-24"/>
+                <li className="kd">
+                    {teabags} &nbsp; Teabags <FaPercentage className="percentage -mt-6 ml-32"/>
                 </li>
                 <li className="rank">
-                    {rank.tier} {rank.sub_tier} Rank <GiStarMedal className="medal -mt-6 ml-36"/>
+                    {rank} Rank <GiStarMedal className="medal -mt-6 ml-36"/>
                 </li>
             </ul>
         </section>
